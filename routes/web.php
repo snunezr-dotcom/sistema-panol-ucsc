@@ -20,6 +20,10 @@ Route::middleware(SetLocale::class)->group(function () {
 
         $request->session()->put('locale', $validated['locale']);
 
+        if ($request->expectsJson()) {
+            return response()->json(['locale' => $validated['locale']]);
+        }
+
         return back();
     })->name('language.update');
 
@@ -60,8 +64,22 @@ Route::middleware(SetLocale::class)->group(function () {
         ->middleware('auth');
 });
 
-// Ruta para importar los datos de Excel a la base de datos
+// Ruta para importar los datos del CSV a la base de datos
 Route::get('/importar-excel', function () {
-    Excel::import(new InventarioImport, base_path('Copia de InventarioModernizadoComparativo.xlsx'));
-    return 'Inventario importado con éxito!';
+    $import = new InventarioImport;
+    Excel::import($import, base_path('Inventario Pañol Difinitivo.csv'));
+
+    $skippedRows = $import->getSkippedRowsWithoutSku();
+    $invalidQuantities = $import->getRowsWithInvalidQuantity();
+
+    return response()->make(sprintf(
+        'Inventario importado con éxito. %d fila%s sin SKU omitida%s y %d cantidad%s no numérica%s asignada%s a 0.',
+        $skippedRows,
+        $skippedRows === 1 ? '' : 's',
+        $skippedRows === 1 ? '' : 's',
+        $invalidQuantities,
+        $invalidQuantities === 1 ? '' : 'es',
+        $invalidQuantities === 1 ? '' : 's',
+        $invalidQuantities === 1 ? '' : 's',
+    ));
 });

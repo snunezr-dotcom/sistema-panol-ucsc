@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -14,31 +15,36 @@ class UserSeeder extends Seeder
             throw new \RuntimeException('Demo users can only be seeded in local or testing environments.');
         }
 
+        $this->call(RoleSeeder::class);
+
         $users = [
             [
                 'name' => 'Administrador',
                 'rut' => '22222222',
                 'password' => '2222',
-                'is_admin' => true,
+                'role' => 'Administrador',
             ],
             [
-                'name' => 'Profesor Lorenzo',    
+                'name' => 'Profesor Lorenzo',
                 'rut' => '18276543',
                 'password' => '1234',
-                'is_admin' => false,
+                'role' => 'Profesores',
             ],
             [
                 'name' => 'Profesor Demo 2',
                 'rut' => '19876543',
                 'password' => '5678',
-                'is_admin' => false,
+                'role' => 'Profesores',
             ],
         ];
 
         foreach ($users as $user) {
+            $role = Role::where('name', $user['role'])->firstOrFail();
+            unset($user['role']);
+
             User::updateOrCreate(
                 ['rut' => $user['rut']],
-                $user,
+                [...$user, 'role_id' => $role->id, 'is_admin' => $role->name === 'Administrador'],
             );
         }
     }

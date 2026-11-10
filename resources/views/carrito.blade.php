@@ -130,7 +130,7 @@
             cursor: pointer;
         }
         .calendar-day:hover:not(:disabled),
-        .calendar-day[aria-pressed="true"] { background: #e50027; color: #fff; }
+        .calendar-day[aria-pressed="true"] { background: #e60028; color: #fff; }
         .calendar-day:disabled { color: var(--muted); opacity: 0.4; cursor: not-allowed; }
         .form-control::placeholder { color: var(--muted); }
         body[data-theme="dark"] .form-control { border-color: #555; }
@@ -138,14 +138,14 @@
         body[data-theme="dark"] select[name="carrera_id"] { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='white' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); }
         
             /* Botón de confirmar reversa */
-            .btn-continuar { width: 101%; background: #e50027; color: white; border: none; padding: 10px; border-radius: 20px; font-weight: bold; font-size: 0.95em; cursor: pointer; transition: 0.2s; }
+            .btn-continuar { width: 101%; background: #e60028; color: white; border: none; padding: 10px; border-radius: 20px; font-weight: bold; font-size: 0.95em; cursor: pointer; transition: 0.2s; }
             .btn-continuar:hover { background: #cc0022; }
 
     /* Cesta de Materiales y Detalles del Ramo */
     .cesta h2, .resumen h2 { font-size: 1.35em !important; margin-top: 0; border-bottom: 2px solid #f5f5f5; padding-bottom: 10px !important; margin-bottom: 15px; }
     body[data-theme="dark"] .cesta h2,
     body[data-theme="dark"] .resumen h2 { border-bottom-color: var(--border) !important; }
-    body[data-theme="dark"] .site-navbar { background-color: #1e1e1e !important; }
+    body[data-theme="dark"] .site-navbar { background-color: #e60028 !important; }
     body[data-theme="dark"] .dropdown-menu { background-color: #2a2a2a; }
     body[data-theme="dark"] .dropdown-item { color: #f5f5f5 !important; }
     body[data-theme="dark"] .dropdown-item:hover { background-color: #3b3b3b; }
@@ -159,10 +159,14 @@
         width: 100%;
         border: 0;
         background: transparent;
-        color: inherit;
+        color: #6c757d;
         font: inherit;
     }
-    body[data-theme="dark"] .language-menu-form .language-select { color: #f5f5f5; }
+    .dropdown-menu { min-width: 260px; }
+    .dropdown-menu .theme-menu-toggle { color: #6c757d !important; }
+    .site-navbar .user-menu-trigger { color: #dedede !important; }
+    body[data-theme="dark"] .dropdown-menu .theme-menu-toggle,
+    body[data-theme="dark"] .language-menu-form .language-select { color: #adb5bd !important; }
     .language-menu-form option { color: #222; }
     @media (max-width: 767px) {
         body { padding: 16px; }
@@ -173,19 +177,19 @@
 <body style="padding-top: 0;">
 
     <!-- Barra de Navegación Superior -->
-    <nav class="navbar fixed-top shadow-sm site-navbar" style="background-color: #e60028; padding: 15px 30px;">
+    <nav class="navbar fixed-top shadow-sm site-navbar" style="background-color: #e60028; height: 64px; box-sizing: border-box; padding: 6px 24px 6px 12px;">
         <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
             
-            <!-- Lado Izquierdo de la pagina Logo UCSC en negro -->
+            <!-- Logo institucional -->
             <a href="{{ url('/') }}" class="text-decoration-none">
-                <img src="{{ asset('img/logo-ucsc.png') }}" alt="Logo UCSC" height="35">
+                <img src="{{ asset('img/logo-instituto-tecnologico-talcahuano.png') }}" alt="UCSC Instituto Tecnológico, Sede Talcahuano" height="56" style="max-height: 56px;">
             </a>
 
             <!-- Lado Derecho de la pagina Icono Gris -> Nombre -> Flecha -->
             <div class="dropdown">
-                <a class="d-flex align-items-center text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none;">
+                <a class="user-menu-trigger d-flex align-items-center text-white text-decoration-none" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="outline: none;">
                     
-                    <div class="rounded-circle d-flex justify-content-center align-items-center me-2" style="background-color: #e9ecef; width: 32px; height: 32px;">
+                    <div class="rounded-circle d-flex justify-content-center align-items-center me-2" style="background-color: #e9ecef; width: 30px; height: 32px;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#adb5bd" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                         </svg>
@@ -227,7 +231,6 @@
     <div style="margin-top: 100px;"></div>
 
     <div class="container-cesta">
-        
         <!-- Items -->
         <div class="cesta">
             <h2 style="margin-top: 0; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px;">{{ __('Cesta de Materiales') }}</h2>
@@ -257,7 +260,6 @@
                 <p>{{ __('No hay items en la cesta.') }}</p>
             @endif
         </div>
-
         <!-- Formulario de reserva -->
         <div class="resumen">
             <h2 style="margin-top: 0; border-bottom: 2px solid #f5f5f5; padding-bottom: 15px;">{{ __('Detalles del Ramo') }}</h2>
@@ -280,7 +282,7 @@
                         <option value="999">Técnico Universitario en Electromecánica</option>
                         <option value="999">Técnico Universitario en Refrigeración y Climatización Industrial</option>
                     </select>
-                    <div style="font-size: 0.75em; color: #e50027; margin-top: 5px;">{{ __('* Límite de 10 objetos totales por carrera.') }}</div>
+                    <div style="font-size: 0.75em; color: #e60028; margin-top: 5px;">{{ __('* Límite de 10 objetos totales por carrera.') }}</div>
                 </div>
 
                 <div class="form-group">
@@ -299,6 +301,7 @@
                             step="60"
                             placeholder="{{ __('Selecciona fecha y hora') }}"
                             aria-label="{{ __('¿Para cuándo lo necesitas?') }}"
+                            data-locale="{{ app()->getLocale() }}"
                                 data-message-past="{{ __('Selecciona una fecha y hora desde este momento en adelante.') }}"
                                 data-message-sunday="{{ __('El domingo el instituto está cerrado. Selecciona de lunes a sábado.') }}"
                                 data-message-hours="{{ __('Horario disponible para este día: :opening a :closing.') }}"
@@ -660,11 +663,54 @@
                     }
                 }
             });
-            document.addEventListener('pointerdown', (event) => {
-                if (!picker.contains(event.target)) {
-                    closePicker();
-                }
-            });
+            if (!window.panolDatePickerOutsideHandler) {
+                window.panolDatePickerOutsideHandler = (event) => {
+                    const activePicker = document.querySelector('[data-datetime-picker]');
+                    if (activePicker && !activePicker.contains(event.target)) {
+                        activePicker.querySelector('[data-picker-panel]').hidden = true;
+                        activePicker.querySelector('[data-picker-toggle]').setAttribute('aria-expanded', 'false');
+                    }
+                };
+                document.addEventListener('pointerdown', window.panolDatePickerOutsideHandler);
+            }
+
+            window.panolDatePicker = {
+                snapshot: () => ({
+                    isOpen: !panel.hidden,
+                    dateValue: dateInput.value,
+                    selectedDate: selectedDateInput.value,
+                    hour: hourInput.value,
+                    minute: minuteInput.value,
+                    visibleMonth: formatDate(visibleMonth).slice(0, 7),
+                }),
+                restore: (state) => {
+                    if (!state) {
+                        return;
+                    }
+
+                    updateMinimumDate();
+                    dateInput.value = state.dateValue || '';
+                    selectedDateInput.value = state.selectedDate
+                        || state.dateValue?.slice(0, 10)
+                        || minimumDate;
+                    if (state.visibleMonth) {
+                        visibleMonth = new Date(`${state.visibleMonth}-01T12:00:00`);
+                    }
+                    renderCalendar();
+                    updateHours();
+
+                    if (state.hour && !hourInput.disabled) {
+                        hourInput.value = state.hour;
+                        updateMinutes();
+                    }
+                    if (state.minute && !minuteInput.disabled) {
+                        minuteInput.value = state.minute;
+                    }
+
+                    panel.hidden = !state.isOpen;
+                    toggle.setAttribute('aria-expanded', String(state.isOpen));
+                },
+            };
 
             updateMinimumDate();
             renderCalendar();

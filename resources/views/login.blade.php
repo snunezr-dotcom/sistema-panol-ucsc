@@ -36,8 +36,10 @@
             max-width: 632px;
             text-align: center;
         }
-        .logo { 
-            max-width: 260px;
+        .logo {
+            display: block;
+            width: min(100%, 760px);
+            height: auto;
             margin-bottom: 14px;
         }
         .login-footer {
@@ -46,7 +48,7 @@
             align-items: center;
             gap: 16px;
             margin-top: 26px;
-            color: #e50027;
+            color: #e60028;
             font-size: 14px;
         }
         .language-select {
@@ -74,7 +76,7 @@
             cursor: pointer;
         }
         .theme-toggle:hover {
-            background: rgba(229, 0, 39, 0.08);
+            background: rgba(230, 0, 40, 0.08);
         }
         .theme-toggle:focus-visible,
         .language-select:focus {
@@ -111,7 +113,7 @@
         }
         .btn-login { 
             width: 100%; 
-            background: #e50027; 
+            background: #e60028;
             color: white; 
             border: none; 
             padding: 14px; 
@@ -144,8 +146,7 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- Logo oficial de la UCSC -->
-        <img src="https://uvirtual2.ucsc.cl/pluginfile.php/1/core_admin/logo/0x200/1791279004/logoucsc.png" alt="Logo UCSC" class="logo">
+        <img src="{{ asset('img/logo-login-ucsc-instituto.png') }}" alt="UCSC Instituto Tecnológico" class="logo">
 
         <!-- Mensaje de error por si la contraseña es incorrecta -->
         @if(session('error'))
